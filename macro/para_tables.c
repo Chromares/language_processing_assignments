@@ -76,6 +76,8 @@ void display_fp(formal_pos *pa) {
         printf("%lld\t %s\n", temp->position, temp->formal);
         temp = temp->next;
     }
+    if(!pa->count)
+        printf("\t<NO ARGUMENTS>\n");
     printf("-----------------\n");
     return;
 }

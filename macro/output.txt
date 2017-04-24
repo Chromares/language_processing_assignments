@@ -1,2 +1,2 @@
 random command
-such bs
+such tp

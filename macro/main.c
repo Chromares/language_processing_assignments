@@ -26,8 +26,8 @@ void collect() {
     __ssize_t read = 0;
     mntline *temp;
     char c = 'y', *hase;
-    int qw, switcher = 0;
-    long long int ds;
+    int qw, switcher = 0, qww;
+    long long int ds, i, k;
     while ((read = getline(&line, &len, pass)) != -1) {
         //printf("%s\n", line);
         if(switcher) {
@@ -37,13 +37,29 @@ void collect() {
             while (!strcmp(token, " ")) {
                 token = strtok(NULL, " ");
             }
-            if (!strcmp(token, "MEND") || !strcmp(token, "mend") || !strcmp(token, "Mend") || !strcmp(token, "MEND\n") || !strcmp(token, "mend\n") || !strcmp(token, "Mend\n")) {
+            if(!strcmp(token, "MEND") || !strcmp(token, "mend") || !strcmp(token, "Mend") || !strcmp(token, "MEND\n") || !strcmp(token, "mend\n") || !strcmp(token, "Mend\n")) {
+                temp = s_mnt->head;
+                //while(temp->next != NULL) {
+                //    temp = temp->next;
+                //}
+                //k = switcher - 1;
+                for(i = 1; i < (s_mnt->count - k); i++) {
+                  temp = temp->next;
+                }
+                temp->end = s_mdt->count;
+                switcher--;
+                k++;
+                continue;
+            }
+            //nested macro
+            else if (!strcmp(token, "MACRO") || !strcmp(token, "macro") || !strcmp(token, "Macro") || !strcmp(token, "MACRO\n") || !strcmp(token, "macro\n") || !strcmp(token, "Macro\n")) {
+                qww = add_to_mnt(s_mnt, line);
                 temp = s_mnt->head;
                 while(temp->next != NULL) {
                     temp = temp->next;
                 }
-                temp->end = s_mdt->count;
-                switcher = 0;
+                temp->start = s_mdt->count + 1;
+                switcher++;
                 continue;
             }
             else {
@@ -51,6 +67,7 @@ void collect() {
                 continue;
             }
         }
+        k = 0;
         hase = malloc(sizeof(line));
         strcpy(hase, line);
         qw = add_to_mnt(s_mnt, line);
@@ -88,12 +105,13 @@ int main() {
     mdt_disp(s_mdt);
     printf("\n\nMNT Table\n\n");
     mnt_disp(s_mnt);
-    printf("\n\nFormal vs Positional\n\n");
+    printf("\n\nFormal vs Positional Tables\n\n");
     mntline *kat;
     kat = s_mnt->head;
     long long int i;
+    printf("-----------------\n");
     for(i = 0; i < s_mnt->count; i++) {
-        printf("%lld> %s\n", i, kat->name);
+        printf("   %s\n", kat->name);
         display_fp(kat->muhaha);
         kat = kat->next;
     }

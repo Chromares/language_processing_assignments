@@ -1,4 +1,4 @@
-macro raz abc x y
+macro pasta abc x y
 something abc
 no x
 but y
@@ -8,5 +8,14 @@ how is this
 even
 remotely fun
 mend
+macro hanz flammenwerfer
+get me
+the
+macro who when where
+right where
+now when
+mend
+old flammenwerfer
+mend
 random command
-such bs
+such tp
