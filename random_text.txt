@@ -1,0 +1,4 @@
+mov a b
+cat b c
+mango a d
+this and that

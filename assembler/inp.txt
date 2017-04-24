@@ -1,0 +1,9 @@
+start 200
+mover al 05
+x equ z
+x   equ y
+c random al x
+spos a b c
+y dc 70
+z dc 50
+c ds 82

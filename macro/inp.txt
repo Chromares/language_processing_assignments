@@ -1,0 +1,14 @@
+macro abc x y z
+alpha
+beta gamma
+delta
+mend
+macro achhu
+bo
+bo
+ko
+po
+mend
+ahu ahu ahu
+ahu ahu ahu
+ahu ahu ahu

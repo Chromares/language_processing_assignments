@@ -1,0 +1,8 @@
+[200] mover al 05
+[203] x equ z
+[204] x equ y
+[205] c random al x
+[210] spos a b c
+[211] y dc 70
+[212] z dc 50
+[213] c ds 82
