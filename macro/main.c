@@ -16,9 +16,10 @@ void collect() {
     pass = fopen("inp.txt", "r");
     if(pass == NULL)
         exit(EXIT_FAILURE);
-
     FILE *pass_o;
-    pass_o = fopen("outp.txt", "w+");
+    pass_o = fopen("output.txt", "w+");
+    if(pass_o == NULL)
+        exit(EXIT_FAILURE);
     char *line = NULL, *token, *sub;
     line = malloc((100 * sizeof(char)));
     size_t len = 100;
@@ -26,10 +27,9 @@ void collect() {
     mntline *temp;
     char c = 'y', *hase;
     int qw, switcher = 0;
-    long long int ds;   //dhobaless16.comp@coep.ac.in
-    //printf("huhu");
+    long long int ds;
     while ((read = getline(&line, &len, pass)) != -1) {
-
+        //printf("%s\n", line);
         if(switcher) {
             hase = malloc(sizeof(line));
             strcpy(hase, line);
@@ -48,12 +48,11 @@ void collect() {
             }
             else {
                 add_to_mdt(s_mdt, line);
+                continue;
             }
         }
-
         hase = malloc(sizeof(line));
         strcpy(hase, line);
-
         qw = add_to_mnt(s_mnt, line);
 
         if (!qw) {
@@ -61,28 +60,40 @@ void collect() {
             while (temp->next != NULL) {
                 temp = temp->next;
             }
-            temp->start = s_mdt->count;
+            temp->start = (s_mdt->count + 1);
             switcher = 1;
             continue;
         }
         //just consume right now, we will expand later// also consume with pos
-        fprintf(pass_o, "%s ", hase);
+        fprintf(pass_o, "%s", hase);
     }
     return;
 }
 
 int main() {
-    mdt_up(s_mdt);
-    mnt_up(s_mnt);
+    //mdt_up(s_mdt);
+    //mnt_up(s_mnt);
+    s_mdt = malloc(sizeof(mdt));
+    s_mdt->count = 0;
+    s_mdt->head = NULL;
+
+
+    s_mnt = malloc(sizeof(mnt));
+    s_mnt->count = 0;
+    s_mnt->head = NULL;
 
     collect();
 
+    printf("MDT Table\n\n");
     mdt_disp(s_mdt);
+    printf("\n\nMNT Table\n\n");
     mnt_disp(s_mnt);
+    printf("\n\nFormal vs Positional\n\n");
     mntline *kat;
     kat = s_mnt->head;
-    printf("hello\n");
-    while(kat->next != NULL) {
+    long long int i;
+    for(i = 0; i < s_mnt->count; i++) {
+        printf("%lld> %s\n", i, kat->name);
         display_fp(kat->muhaha);
         kat = kat->next;
     }

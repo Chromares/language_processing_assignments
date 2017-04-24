@@ -20,18 +20,29 @@ void mdt_disp(mdt *s_mdt) {
     long long int i = 0;
     printf("COUNT\tDEFINITION\n");
     for (i = 0; i < s_mdt->count; i++) {
-        printf("%lld\t%s\n", temp->line_count, temp->def);
+        printf("%lld\t%s", temp->line_count, temp->def);
         temp = temp->next;
     }
     return;
 }
 void add_to_mdt(mdt *s_mdt, char *line) {
-    mdtline *temp = s_mdt->head;
-    while(temp->next != NULL) {
-        temp = temp->next;
+
+    mdtline *temp;
+    if(s_mdt->head == NULL) {
+        temp = malloc(sizeof(mdtline));
+        s_mdt->head = temp;
+        temp->next = NULL;
     }
-    temp->next = malloc(sizeof(mdtline));
-    temp->next->next = NULL;
+    else {
+      temp = s_mdt->head;
+      while(temp->next != NULL) {
+          temp = temp->next;
+      }
+      temp->next = malloc(sizeof(mdtline));
+      temp->next->next = NULL;
+      temp = temp->next;
+    }
+
     s_mdt->count += 1;
     temp->line_count = s_mdt->count;
     temp->def = malloc(sizeof(line));

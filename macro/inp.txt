@@ -1,14 +1,12 @@
-macro abc x y z
-alpha
-beta gamma
-delta
+macro raz abc x y
+something abc
+no x
+but y
 mend
-macro achhu
-bo
-bo
-ko
-po
+macro fun
+how is this
+even
+remotely fun
 mend
-ahu ahu ahu
-ahu ahu ahu
-ahu ahu ahu
+random command
+such bs
