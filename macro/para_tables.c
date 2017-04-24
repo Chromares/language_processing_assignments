@@ -44,9 +44,19 @@ void add_to_fp(formal_pos *fp, char *item) {
 }
 void add_to_pa(pos_actual *pa, char *item) {
     pos_actual_line *temp;
-    temp = pa->head;
-    while(temp->next != NULL) {
+    if(pa->head == NULL) {
+      temp = malloc(sizeof(pos_actual_line));
+      pa->head = temp;
+      temp->next = NULL;
+    }
+    else {
+      temp = pa->head;
+      while(temp->next != NULL) {
+          temp = temp->next;
+        }
+        temp->next = malloc(sizeof(pos_actual_line));
         temp = temp->next;
+        temp->next = NULL;
     }
     temp->actual = malloc(sizeof(item));
     strcpy(temp->actual, item);
